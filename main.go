@@ -18,7 +18,9 @@ func main() {
 		return
 	}
 
-	app := ui.NewWindow()
+	config.Configuration = config.DefaultConfig()
+
+	app := ui.NewWindow(config.Configuration.Colors, &config.Configuration.Shortcuts)
 	err := app.Run()
 	if err != nil {
 		fmt.Printf("Failed to open gui: %v", err)
