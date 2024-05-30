@@ -95,20 +95,20 @@ func (m *ModalLayout) Focus(delegate func(p tview.Primitive)) {
 	m.grid.Focus(delegate)
 }
 
-func (w *ModalLayout) HasFocus() bool {
-	return w.grid.HasFocus()
+func (m *ModalLayout) HasFocus() bool {
+	return m.grid.HasFocus()
 }
 
 func (m *ModalLayout) Blur() {
 	m.grid.Blur()
 }
 
-func (w *ModalLayout) MouseHandler() func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
-	return w.grid.MouseHandler()
+func (m *ModalLayout) MouseHandler() func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
+	return m.grid.MouseHandler()
 }
 
-func (w *ModalLayout) PasteHandler() func(text string, setFocus func(p tview.Primitive)) {
-	return w.grid.PasteHandler()
+func (m *ModalLayout) PasteHandler() func(text string, setFocus func(p tview.Primitive)) {
+	return m.grid.PasteHandler()
 }
 
 // GetGrid returns underlying grid that items are added to

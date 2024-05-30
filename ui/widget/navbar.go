@@ -81,8 +81,8 @@ func (n *NavBar) Focus(delegate func(p tview.Primitive)) {
 	n.buttons[n.btnActiveIndex].Focus(nil)
 }
 
-func (w *NavBar) HasFocus() bool {
-	return w.grid.HasFocus()
+func (n *NavBar) HasFocus() bool {
+	return n.grid.HasFocus()
 }
 
 func (n *NavBar) Blur() {
@@ -91,12 +91,12 @@ func (n *NavBar) Blur() {
 	n.grid.Blur()
 }
 
-func (w *NavBar) MouseHandler() func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
-	return w.grid.MouseHandler()
+func (n *NavBar) MouseHandler() func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
+	return n.grid.MouseHandler()
 }
 
-func (w *NavBar) PasteHandler() func(text string, setFocus func(p tview.Primitive)) {
-	return w.grid.PasteHandler()
+func (n *NavBar) PasteHandler() func(text string, setFocus func(p tview.Primitive)) {
+	return n.grid.PasteHandler()
 }
 
 func NewNavBar(colors *NavBarColors, doneFunc func(label string)) *NavBar {
