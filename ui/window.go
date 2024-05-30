@@ -69,14 +69,19 @@ func NewWindow(colors config.Colors, shortcuts *config.Shortcuts) *Window {
 	w.app.SetInputCapture(w.inputCapture)
 
 	w.layout.SetGridYSize([]int{3, -1, -1, -1, -1, -1, -1, -1, -1, 3})
+	w.grid.SetBackgroundColor(colors.Background)
+
+	w.grid.SetRows(1, -1)
+	w.grid.SetColumns(-1)
+	w.grid.SetMinSize(1, 2)
 
 	col := colors.NavBar.ToNavBar()
 
 	w.navBar = widget.NewNavBar(col, w.navBarClicked)
-	navBarLabels = []string{"Help", "New Task", "Current Task", "Next Task", "Stats", "Quit"}
+	navBarLabels = []string{"Help", "New", "Current", "Next", "Stats", "Quit"}
 
 	sc := shortcuts.NavBar
-	navBarShortucts = []tcell.Key{sc.Help, sc.NewTask, sc.CurrentTask, sc.NextTask, sc.Stats, sc.Quit}
+	navBarShortucts = []tcell.Key{sc.Help, sc.New, sc.Current, sc.Next, sc.Stats, sc.Quit}
 
 	for i, v := range navBarLabels {
 		btn := tview.NewButton(v)
