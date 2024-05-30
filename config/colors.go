@@ -28,6 +28,7 @@ type Colors struct {
 	ButtonLabelSelected      tcell.Color
 	ModalBackground          tcell.Color
 	NavBar                   ColorNavBar
+	Tasks                    ColorTasks
 }
 
 func defaultColors() Colors {
@@ -46,6 +47,7 @@ func defaultColors() Colors {
 		ButtonLabelSelected:      tcell.Color253,
 		ModalBackground:          colorModalbackground,
 		NavBar:                   defaultColorNavBar(),
+		Tasks:                    defaultColorTasks(),
 	}
 }
 
@@ -83,5 +85,27 @@ func (c *ColorNavBar) ToNavBar() *widget.NavBarColors {
 		TextFocus:             c.TextFocus,
 		Shortcut:              c.Shortcut,
 		ShortcutFocus:         c.ShortcutFocus,
+	}
+}
+
+type ColorTasks struct {
+	Background         tcell.Color
+	Background2nd      tcell.Color
+	BackgroundSelected tcell.Color
+	Text               tcell.Color
+	TextSelected       tcell.Color
+	HeaderText         tcell.Color
+	HeaderBackground   tcell.Color
+}
+
+func defaultColorTasks() ColorTasks {
+	return ColorTasks{
+		Background:         colorBackground,
+		Background2nd:      tcell.Color236,
+		BackgroundSelected: tcell.Color23,
+		Text:               tcell.Color252,
+		TextSelected:       tcell.Color253,
+		HeaderText:         tcell.Color180,
+		HeaderBackground:   tcell.Color235,
 	}
 }

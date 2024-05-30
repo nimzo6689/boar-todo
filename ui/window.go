@@ -18,6 +18,9 @@ type Window struct {
 	grid   *tview.Grid
 
 	navBar *widget.NavBar
+	tasks  *TaskTable
+
+	tabWidgets []tview.Primitive
 }
 
 func (w *Window) Draw(screen tcell.Screen) {
@@ -69,6 +72,7 @@ func NewWindow(colors config.Colors, shortcuts *config.Shortcuts) *Window {
 	w.app.SetInputCapture(w.inputCapture)
 
 	w.layout.SetGridYSize([]int{3, -1, -1, -1, -1, -1, -1, -1, -1, 3})
+	w.tasks = NewTaskTable()
 	w.grid.SetBackgroundColor(colors.Background)
 
 	w.grid.SetRows(1, -1)
@@ -91,6 +95,11 @@ func NewWindow(colors config.Colors, shortcuts *config.Shortcuts) *Window {
 	w.grid.AddItem(w.navBar, 0, 0, 1, 1, 1, 10, false)
 	w.grid.AddItem(w.layout, 1, 0, 1, 1, 4, 4, true)
 
+	w.tabWidgets = append(w.tabWidgets, w.tasks)
+
+	w.initDefaultLayout()
+	w.app.SetFocus(w.tasks)
+
 	return w
 }
 
@@ -100,6 +109,12 @@ func (w *Window) inputCapture(event *tcell.EventKey) *tcell.EventKey {
 	default:
 		return event
 	}
+}
+
+func (w *Window) initDefaultLayout() {
+	w.layout.Grid().Clear()
+
+	w.layout.Grid().AddItem(w.tasks, 0, 0, 10, 10, 10, 10, true)
 }
 
 func (w *Window) navBarClicked(label string) {
