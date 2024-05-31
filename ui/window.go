@@ -104,11 +104,15 @@ func NewWindow(colors config.Colors, shortcuts *config.Shortcuts) *Window {
 }
 
 func (w *Window) inputCapture(event *tcell.EventKey) *tcell.EventKey {
+	navbar := config.Configuration.Shortcuts.NavBar
 	key := event.Key()
 	switch key {
+	case navbar.Quit:
+		w.app.Stop()
 	default:
 		return event
 	}
+	return nil
 }
 
 func (w *Window) initDefaultLayout() {
