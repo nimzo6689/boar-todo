@@ -139,11 +139,11 @@ func (n *NavBar) AddButton(button *tview.Button, key tcell.Key) {
 	n.grid.AddItem(button, 0, 2*count, 1, 1, 1, 5, false)
 
 	widths := make([]int, len(n.buttons)*2+1)
-	spaceWidth := -1
-	for i := 0; i < len(n.buttons)+1; i++ {
-		widths[i*2] = -2
-		if i > 0 {
-			widths[i*2-1] = spaceWidth
+	for i := 0; i < len(widths); i++ {
+		if i%2 == 0 {
+			widths[i] = -2
+		} else {
+			widths[i] = -1
 		}
 	}
 
