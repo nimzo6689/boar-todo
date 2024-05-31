@@ -125,6 +125,8 @@ func (n *NavBar) AddButton(button *tview.Button, key tcell.Key) {
 	button.SetSelectedFunc(wrapKeyFunc(button.GetLabel(), n.doneFunc))
 	button.SetBackgroundColor(n.colors.ButtonBackground)
 	button.SetBackgroundColorActivated(n.colors.ButtonBackgroundFocus)
+	button.SetStyle(tcell.StyleDefault.Background(n.colors.ButtonBackground).Foreground(n.colors.Text))
+	button.SetActivatedStyle(tcell.StyleDefault.Background(n.colors.ButtonBackgroundFocus).Foreground(n.colors.TextFocus))
 	button.SetLabelColor(n.colors.Text)
 	button.SetLabelColorActivated(n.colors.TextFocus)
 
