@@ -13,6 +13,15 @@
 			],
 			"hideSystemGoroutines": true,
 			"console": "integratedTerminal"
+		},
+		{
+			"name": "Attach to a running Boar todo",
+			"type": "go",
+			"request": "attach",
+			"mode": "local",
+			"processId": "boar-todo",
+			"hideSystemGoroutines": true,
+			"console": "integratedTerminal"
 		}
 	]
 }
