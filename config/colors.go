@@ -29,6 +29,7 @@ type Colors struct {
 	ModalBackground          tcell.Color
 	NavBar                   ColorNavBar
 	Tasks                    ColorTasks
+	Help                     ColorHelp
 }
 
 func defaultColors() Colors {
@@ -48,6 +49,7 @@ func defaultColors() Colors {
 		ModalBackground:          colorModalbackground,
 		NavBar:                   defaultColorNavBar(),
 		Tasks:                    defaultColorTasks(),
+		Help:                     defaultColorHelp(),
 	}
 }
 
@@ -107,5 +109,19 @@ func defaultColorTasks() ColorTasks {
 		TextSelected:       tcell.Color253,
 		HeaderText:         tcell.Color180,
 		HeaderBackground:   tcell.Color235,
+	}
+}
+
+type ColorHelp struct {
+	Background tcell.Color
+	Text       tcell.Color
+	Headers    tcell.Color
+}
+
+func defaultColorHelp() ColorHelp {
+	return ColorHelp{
+		Background: colorModalbackground,
+		Text:       tcell.Color252,
+		Headers:    tcell.Color228,
 	}
 }

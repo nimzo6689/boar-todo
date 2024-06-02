@@ -5,6 +5,7 @@ import (
 	"github.com/rivo/tview"
 
 	"github.com/nimzo6689/boar-todo/config"
+	"github.com/nimzo6689/boar-todo/ui/modals"
 	"github.com/nimzo6689/boar-todo/ui/widget"
 )
 
@@ -19,6 +20,12 @@ type Window struct {
 
 	navBar *widget.NavBar
 	tasks  *TaskTable
+
+	help *modals.Help
+
+	hasModal  bool
+	modal     widget.Modal
+	lastFocus tview.Primitive
 
 	tabWidgets []tview.Primitive
 }
@@ -66,6 +73,7 @@ func NewWindow(colors config.Colors, shortcuts *config.Shortcuts) *Window {
 		app:    tview.NewApplication(),
 		layout: widget.NewModalLayout(),
 		grid:   tview.NewGrid(),
+		help:   modals.NewHelp(),
 	}
 
 	w.app.SetRoot(w, true)
@@ -103,12 +111,35 @@ func NewWindow(colors config.Colors, shortcuts *config.Shortcuts) *Window {
 	return w
 }
 
+func (w *Window) addModal(modal widget.Modal, size widget.ModalSize) {
+	if !w.hasModal {
+		w.layout.AddDynamicModal(modal, size)
+
+		w.lastFocus = w.app.GetFocus()
+		w.app.SetFocus(modal)
+		w.modal = modal
+		w.hasModal = true
+	}
+}
+
 func (w *Window) inputCapture(event *tcell.EventKey) *tcell.EventKey {
 	navbar := config.Configuration.Shortcuts.NavBar
 	key := event.Key()
 	switch key {
+	case navbar.Help:
+		if !w.hasModal {
+			w.addModal(w.help, widget.ModalSizeMedium)
+		}
 	case navbar.Quit:
 		w.app.Stop()
+	case tcell.KeyEscape:
+		if w.hasModal {
+			w.layout.RemoveModal(w.modal)
+			w.app.SetFocus(w.lastFocus)
+			w.lastFocus = nil
+			w.modal = nil
+			w.hasModal = false
+		}
 	default:
 		return event
 	}

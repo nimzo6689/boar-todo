@@ -86,9 +86,7 @@ func (m *ModalLayout) SetRect(x, y, width, height int) {
 }
 
 func (m *ModalLayout) InputHandler() func(event *tcell.EventKey, setFocus func(p tview.Primitive)) {
-	return m.grid.WrapInputHandler(func(event *tcell.EventKey, setFocus func(p tview.Primitive)) {
-
-	})
+	return m.grid.InputHandler()
 }
 
 func (m *ModalLayout) Focus(delegate func(p tview.Primitive)) {
